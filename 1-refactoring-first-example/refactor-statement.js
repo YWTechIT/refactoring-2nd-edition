@@ -1,4 +1,4 @@
-function statement(invoice, plays) {
+function refactorStatement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `청구내역 (고객명: ${invoice.customer})\n`;
@@ -43,3 +43,5 @@ function statement(invoice, plays) {
   result += `적립 포인트: ${volumeCredits}점 \n`;
   return result;
 }
+
+export default refactorStatement;
