@@ -9,7 +9,7 @@ function refactorStatement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf, playFor(perf));
+    let thisAmount = amountFor(perf);
 
     volumeCredits += Math.max(perf.audience - 30, 0);
     if ("comedy" === playFor(perf).type)
@@ -29,7 +29,7 @@ function refactorStatement(invoice, plays) {
     return plays[aPerformance.playID];
   }
 
-  function amountFor(aPerformance, play) {
+  function amountFor(aPerformance) {
     let result = 0;
 
     switch (playFor(aPerformance).type) {
