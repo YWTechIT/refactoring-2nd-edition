@@ -9,10 +9,9 @@ function refactorStatement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    if ("comedy" === playFor(perf).type)
-      volumeCredits += Math.floor(perf.audience / 5);
+    volumeCredits += volumeCreditsFor(perf);
 
+    // 청구 내역을 출력한다.
     result += `${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
       perf.audience
     }석)\n`;
@@ -22,6 +21,14 @@ function refactorStatement(invoice, plays) {
   result += `총액: ${format(totalAmount / 100)}`;
   result += `적립 포인트: ${volumeCredits}점 \n`;
   return result;
+
+  function volumeCreditsFor(perf) {
+    let volumeCredits = 0;
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    if ("comedy" === playFor(perf).type)
+      volumeCredits += Math.floor(perf.audience / 5);
+    return volumeCredits;
+  }
 
   function playFor(aPerformance) {
     return plays[aPerformance.playID];
